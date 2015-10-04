@@ -5,8 +5,10 @@
 
 from app import create_app
 
-from config import development as devconfig
-app = create_app(devconfig)
+from config import DevelopmentConfig
+app = create_app(DevelopmentConfig)
 
 if __name__ == '__main__':
-    app.run()
+    host = app.config.get("HOST")
+    port = app.config.get("PORT")
+    app.run(host=host, port=port)
