@@ -1,0 +1,23 @@
+
+# security:
+#     image: busybox
+#     environment:
+#         POSTGRES_USER: myadmin
+#         POSTGRES_PASSWORD: HverYsecretpw
+
+#################################
+web:
+    image: pdonorio/flasking
+    hostname: flask
+    command: sleep 1234567890
+    # extends:
+    #     service: security
+    # links:
+    #     - sql:db
+    volumes:
+        - .:/data:ro
+    # Open your browser here
+    ports:
+        - 80:5000
+
+#################################
