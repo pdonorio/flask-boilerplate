@@ -20,3 +20,13 @@ class DevelopmentConfig(BaseConfig):
 
     DEBUG = True
     HOST = '0.0.0.0'
+
+    # We have POSTGRESQL. Use docker environment variables
+    dbdriver = "postgresql"
+    dbhost = os.environ["DB_NAME"].split('/')[2]
+    dbport = int(os.environ["DB_PORT"].split(':')[2])
+    dbuser = os.environ["DB_ENV_POSTGRES_USER"]
+    dbpw = os.environ["DB_ENV_POSTGRES_PASSWORD"]
+
+    SQLALCHEMY_DATABASE_URI = "%s://%s:%s@%s:%d" \
+        % (dbdriver, dbuser, dbpw, dbhost, dbport)
